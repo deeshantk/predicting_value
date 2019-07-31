@@ -1,104 +1,37 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+import matplotlib.pyplot as plt
 
-# C extensions
-*.so
+def pridict(xs, ys, value_for_pridiction):
+    plt.plot(xs, ys, color='green', linestyle='dashed', linewidth=1,
+             marker='.', markerfacecolor='blue', markersize=12)
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+    plt.show() # To show the graph of data provided.
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+    # Creating list for store slope of all points
+    slope = []
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+    for x in range(1, len(xs)):  # Storing slopes
+        slope.append((ys[x] - ys[x - 1]) / (xs[x] - xs[x - 1]))
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+    # Initially setting slope to first element of slope list and count to 1
+    m, count = slope[0], 1
 
-# Translations
-*.mo
-*.pot
+    for x in set(slope):
+        if slope.count(x) > count:
+            m = x
+            count = slope.count(x)
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
+    c = ys[0] - m * xs[0]
 
-# Flask stuff:
-instance/
-.webassets-cache
+    return 'The most likely value is = ' + str(m * value_for_pridiction + c)
 
-# Scrapy stuff:
-.scrapy
+def main():
+    # Sample data
+    xs = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    ys = [-2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
 
-# Sphinx documentation
-docs/_build/
+    predicted_value = pridict(xs, ys, int(input('Enter the number to which value is to be pridicted = ')))
 
-# PyBuilder
-target/
+    print(predicted_value)
 
-# Jupyter Notebook
-.ipynb_checkpoints
 
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
+if __name__ == '__main__': main()
