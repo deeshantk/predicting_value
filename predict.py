@@ -22,7 +22,7 @@ def pridict(xs, ys, value_for_pridiction):
 
     c = ys[0] - m * xs[0]
 
-    return 'The most likely value is = ' + str(m * value_for_pridiction + c)
+    return m * value_for_pridiction + c
 
 def main():
     # Sample data
@@ -31,7 +31,7 @@ def main():
 
     predicted_value = pridict(xs, ys, int(input('Enter the number to which value is to be pridicted = ')))
 
-    print(predicted_value)
+    print('The most likely value is =',predicted_value)
 
 
 if __name__ == '__main__': main()
